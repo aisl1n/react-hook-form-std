@@ -1,15 +1,24 @@
 import { useForm } from "react-hook-form";
 import validator from "validator";
 
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  profession: string;
+  privacyTerms: boolean;
+}
+
 const GoodForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm();
+  } = useForm<FormData>();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormData) => {
     alert(JSON.stringify(data));
   };
 
@@ -90,7 +99,7 @@ const GoodForm = () => {
 
       <div className="form-group">
         <div className="checkbox-group">
-          <input type="checkbox" name="privacy-policy" {...register("privacyTerms", { required: true })} />
+          <input type="checkbox" {...register("privacyTerms", { required: true })} />
           <label>I agree with the privacy terms.</label>
         </div>
 
